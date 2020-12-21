@@ -61,19 +61,9 @@ fi
 
 function blob_fixup() {
     case "${1}" in
-    system_ext/etc/init/dpmd.rc)
-        sed -i "s|/system/product/bin/|/system/system_ext/bin/|g" "${2}"
-        ;;
-    system_ext/etc/permissions/com.qti.dpmframework.xml | system_ext/etc/permissions/dpmapi.xml | system_ext/etc/permissions/telephonyservice.xml)
-        sed -i "s|/system/product/framework/|/system/system_ext/framework/|g" "${2}"
-        ;;
-    system_ext/etc/permissions/qcrilhook.xml)
-        sed -i 's|/product/framework/qcrilhook.jar|/system_ext/framework/qcrilhook.jar|g' "${2}"
-        ;;
     vendor/bin/mlipayd@1.1)
         "${PATCHELF}" --remove-needed vendor.xiaomi.hardware.mtdservice@1.0.so "${2}"
         ;;
-
     vendor/lib64/libmlipay.so | vendor/lib64/libmlipay@1.1.so)
         "${PATCHELF}" --remove-needed vendor.xiaomi.hardware.mtdservice@1.0.so "${2}"
         sed -i "s|/system/etc/firmware|/vendor/firmware\x0\x0\x0\x0|g" "${2}"
