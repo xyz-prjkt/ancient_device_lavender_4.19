@@ -20,15 +20,13 @@ set -e
 DEVICE_COMMON=sdm660-common
 VENDOR=xiaomi
 
-INITIAL_COPYRIGHT_YEAR=2018
-
 # Load extract_utils and do some sanity checks
 MY_DIR="${BASH_SOURCE%/*}"
 if [[ ! -d "$MY_DIR" ]]; then MY_DIR="$PWD"; fi
 
-AOSIP_ROOT="$MY_DIR"/../../..
+ANDROID_ROOT="$MY_DIR"/../../..
 
-HELPER="$AOSIP_ROOT"/vendor/aosip/build/tools/extract_utils.sh
+HELPER="$ANDROID_ROOT"/tools/extract-utils/extract_utils.sh
 if [ ! -f "$HELPER" ]; then
     echo "Unable to find helper script at $HELPER"
     exit 1
@@ -36,7 +34,7 @@ fi
 . "$HELPER"
 
 # Initialize the common helper
-setup_vendor "$DEVICE_COMMON" "$VENDOR" "$AOSIP_ROOT" true
+setup_vendor "$DEVICE_COMMON" "$VENDOR" "$ANDROID_ROOT" true
 
 # Copyright headers and guards
 write_headers "jasmine_sprout jason lavender twolip wayne whyred"
@@ -55,7 +53,7 @@ if [ -s "$MY_DIR"/../$DEVICE_SPECIFIED_COMMON/proprietary-files.txt ]; then
 
     # Reinitialize the helper for device specified common
     INITIAL_COPYRIGHT_YEAR="$DEVICE_BRINGUP_YEAR"
-    setup_vendor "$DEVICE_SPECIFIED_COMMON" "$VENDOR" "$AOSIP_ROOT" true
+    setup_vendor "$DEVICE_SPECIFIED_COMMON" "$VENDOR" "$ANDROID_ROOT" true
 
     # Copyright headers and guards
     write_headers "$DEVICE_SPECIFIED_COMMON_DEVICE"
@@ -72,7 +70,7 @@ fi
 if [ -s "$MY_DIR"/../$DEVICE/proprietary-files.txt ]; then
     # Reinitialize the helper for device
     INITIAL_COPYRIGHT_YEAR="$DEVICE_BRINGUP_YEAR"
-    setup_vendor "$DEVICE" "$VENDOR" "$AOSIP_ROOT" false
+    setup_vendor "$DEVICE" "$VENDOR" "$ANDROID_ROOT" false
 
     # Copyright headers and guards
     write_headers
