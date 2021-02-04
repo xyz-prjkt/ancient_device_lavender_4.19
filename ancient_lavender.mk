@@ -39,6 +39,7 @@ $(call inherit-product, vendor/ancient/config/common_full_phone.mk)
 ANCIENT_OFFICIAL := true
 ANCIENT_GAPPS := true
 TARGET_USES_BLUR := true
+TARGET_BOOT_ANIMATION_RES := 1080
 
 # Device Identifier.
 PRODUCT_BUILD_PROP_OVERRIDES += \
