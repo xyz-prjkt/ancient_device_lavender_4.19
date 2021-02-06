@@ -19,11 +19,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.heapminfree=512k \
     dalvik.vm.heapmaxfree=8m
 
-# SurfaceFlinger
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    ro.surface_flinger.has_wide_color_display=true \
-    ro.surface_flinger.use_color_management=true
-
 # Audio
 PRODUCT_PROPERTY_OVERRIDES += \
     af.fast_track_multiplier=1 \
@@ -110,9 +105,20 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Bluetooth
 PRODUCT_PROPERTY_OVERRIDES += \
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.vendor.bt.aac_frm_ctl.enabled=true \
+    persist.bluetooth.bluetooth_audio_hal.disabled=false \
+    ro.vendor.bluetooth.wipower=false \
     vendor.qcom.bluetooth.soc=cherokee
 
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+    persist.vendor.bt.a2dp.aac_whitelist=false \
+    persist.vendor.qcom.bluetooth.enable.splita2dp=true \
+    persist.vendor.qcom.bluetooth.a2dp_offload_cap=sbc-aptx-aptxhd-aac-ldac \
+    persist.bluetooth.a2dp_offload.disabled=true \
+    ro.bluetooth.library_name=libbluetooth_qti.so \
+    ro.bluetooth.a2dp_offload.supported=false \
+    vendor.audio.feature.a2dp_offload.enable=false \
     vendor.bluetooth.soc=cherokee
 
 # BPF
@@ -121,9 +127,71 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Camera
 PRODUCT_PROPERTY_OVERRIDES += \
+    persist.camera.privapp.list=org.codeaurora.snapcam \
+    persist.vendor.camera.dual.isp.sync=0 \
+    persist.vendor.camera.HAL3.enabled=1 \
+    persist.vendor.camera.eis.enable=1 \
+    persist.vendor.camera.exif.make=Xiaomi \
+    persist.vendor.camera.privapp.list=org.codeaurora.snapcam \
+    vendor.camera.aux.packageblacklist=com.discord \
+    camera.aux.packagelist=com.google.android.GoogleCamera,com.android.camera,org.codeaurora.snapcam \
+    vendor.camera.aux.packagelist=com.google.android.GoogleCamera,com.android.camera,org.codeaurora.snapcam \
+    persist.bokeh.switch.lux=290 \
+    persist.camera.auxswitch.threshold=330 \
+    persist.camera.imglib.usefdlite=1 \
+    persist.camera.depth.focus.cb=0 \
+    persist.camera.expose.aux=1 \
+    persist.camera.isp.clock.optmz=0 \
+    persist.camera.isp.turbo=1 \
+    persist.camera.linkpreview=0 \
+    persist.camera.mainswitch.threshold=419 \
+    persist.camera.set.afd=4 \
+    persist.camera.stats.test=0 \
+    persist.flash.low.lux=390 \
+    persist.flash.light.lux=340 \
+    persist.imx376_sunny.low.lux=310 \
+    persist.imx376_sunny.light.lux=280 \
+    persist.imx376_ofilm.low.lux=310 \
+    persist.imx376_ofilm.light.lux=280 \
+    persist.sys.exif.make=Xiaomi \
+    persist.radio.VT_CAM_INTERFACE=2 \
+    ro.eyecare.brightness.threshold=3 \
+    ro.eyecare.brightness.level=8 \
+    ro.hist.brightness.threshold=5 \
+    persist.vendor.camera.multicam.hwsync=TRUE \
+    persist.vendor.camera.multicam.fpsmatch=TRUE \
+    persist.vendor.camera.enableAdvanceFeatures=0x347 \
+    persist.vendor.camera.display.umax=1920x1080 \
+    persist.vendor.camera.display.lmax=1280x720 \
+    vidc.enc.dcvs.extra-buff-count=2 \
+    persist.vendor.camera.eis.enable=0 \
+    persist.camera.eis.enable=0 \
+    persist.vendor.camera.expose.aux=1 \
     persist.vendor.camera.preview.ubwc=0 \
-    vendor.video.disable.ubwc=1 \
-    vidc.enc.dcvs.extra-buff-count=2
+    persist.vendor.camera.stats.test=0 \
+    persist.vendor.camera.isp.clock.optmz=0 \
+    persist.vendor.camera.linkpreview=0 \
+    persist.vendor.camera.isp.turbo=1 \
+    persist.vendor.camera.awb.sync=2 \
+    persist.vendor.camera.fdvideo=1 \
+    persist.vendor.camera.mfnrframenum=8 \
+    persist.vendor.camera.multicam=TRUE \
+    persist.vendor.camera.multicam.framesync=1 \
+    persist.vendor.camera.auxswitch.threshold=330 \
+    persist.vendor.camera.mainswitch.threshold=419 \
+    persist.vendor.ov13855_sunny.low.lux=385 \
+    persist.vendor.ov13855_sunny.light.lux=370 \
+    persist.vendor.s5k3l8_ofilm.low.lux=379 \
+    persist.vendor.s5k3l8_ofilm.light.lux=367 \
+    persist.vendor.camera.stats.test=5 \
+    persist.vendor.camera.depth.focus.cb=0 \
+    persist.vendor.camera.imglib.usefdlite=1 \
+    persist.vendor.imx376_sunny.low.lux=290 \
+    persist.vendor.imx376_sunny.light.lux=275 \
+    persist.vendor.imx376_ofilm.low.lux=290 \
+    persist.vendor.imx376_ofilm.light.lux=275 \
+    persist.vendor.bokeh.switch.lux=290 \
+    persist.vendor.camera.exif.make=Xiaomi
 
 # Charger
 PRODUCT_PRODUCT_PROPERTIES += \
@@ -134,20 +202,43 @@ PRODUCT_PRODUCT_PROPERTIES += \
 PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     persist.vendor.cne.feature=1
 
-# Display Graphics
+# Display
 PRODUCT_PROPERTY_OVERRIDES += \
+    debug.sf.latch_unsignaled=1 \
+    debug.sf.hw=1 \
+    debug.sf.disable_backpressure= 1 \
+    debug.sf.early_app_phase_offset_ns=1500000 \
+    debug.sf.early_gl_phase_offset_ns=3000000 \
+    debug.sf.early_gl_app_phase_offset_ns=15000000 \
+    debug.sf.early_phase_offset_ns=1500000 \
+    debug.sf.enable_gl_backpressure=1 \
+    debug.cpurend.vsync=false \
     debug.hwui.use_buffer_age=false \
-    persist.demo.hdmirotationlock=false \
     persist.hwc.enable_vds=1 \
     ro.opengles.version=196610 \
-    ro.vendor.display.cabl=0 \
+    ro.qualcomm.cabl=0 \
     vendor.display.disable_skip_validate=1 \
+    vendor.gralloc.enable_fb_ubwc=1 \
+    vendor.video.disable.ubwc=1 \
     vendor.display.enable_default_color_mode=0 \
-    vendor.gralloc.enable_fb_ubwc=1
+    video.disable.ubwc=1
+
+# The default sf phase offset is set to 6ms, to avoid it be included into next
+# vsync threshold, set high fps early sf and next vsync threshold phase offset
+# to 6.1ms, which is bigger than all sf phase offsets in normal frame rate.
+PRODUCT_PROPERTY_OVERRIDES += \
+    debug.sf.high_fps_early_phase_offset_ns=6100000 \
+    debug.sf.high_fps_early_gl_phase_offset_ns=9000000 \
+    debug.sf.phase_offset_threshold_for_next_vsync_ns=6100000
 
 # FRP
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.frp.pst=/dev/block/bootdevice/by-name/frp
+
+# HAL1 apps list
+PRODUCT_PROPERTY_OVERRIDES += \
+    camera.hal1.packagelist=com.android.camera,com.android.camera2,com.instagram.android \
+    vendor.camera.hal1.packagelist= com.android.camera,com.android.camera2,com.instagram.android
 
 # IMS
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -190,6 +281,15 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     ril.subscription.types=NV,RUIM \
     telephony.lteOnCdmaDevice=1
 
+# Rendering
+PRODUCT_PROPERTY_OVERRIDES += \
+    debug.egl.hw=1 \
+    debug.enable.sglscale=1 \
+    debug.sf.disable_hwc=0 \
+    debug.sf.gpu_comp_tiling=1 \
+    debug.sf.recomputecrop=0 \
+    persist.hwc.ptor.enable=true
+
 # Sensor
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.sdk.sensors.gestures=false \
@@ -202,21 +302,12 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # SurfaceFlinger
 PRODUCT_PROPERTY_OVERRIDES += \
-    debug.sf.early_app_phase_offset_ns=1500000 \
-    debug.sf.early_gl_app_phase_offset_ns=15000000 \
-    debug.sf.early_gl_phase_offset_ns=3000000 \
-    debug.sf.early_phase_offset_ns=1500000 \
-    debug.sf.disable_backpressure=1 \
-    debug.sf.enable_hwc_vds=1 \
-    debug.sf.hw=1 \
-    debug.sf.latch_unsignaled=1
-
-PRODUCT_PROPERTY_OVERRIDES += \
     ro.surface_flinger.force_hwc_copy_for_virtual_displays=true \
+    ro.surface_flinger.max_frame_buffer_acquired_buffers=3 \
     ro.surface_flinger.max_virtual_display_dimension=4096 \
-    ro.surface_flinger.vsync_event_phase_offset_ns=2000000 \
-    ro.surface_flinger.vsync_sf_event_phase_offset_ns=6000000 \
-    ro.surface_flinger.max_frame_buffer_acquired_buffers=3
+    ro.surface_flinger.protected_contents=true \
+    ro.surface_flinger.max_virtual_display_dimension=4096 \
+    ro.surface_flinger.wcg_composition_dataspace=143261696
 
 # Time
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -232,3 +323,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.adb.secure=0 \
     ro.secure=0 \
     ro.debuggable=1
+
+# Google
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.com.google.ime.corner_key_r=32
